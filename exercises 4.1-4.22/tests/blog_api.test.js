@@ -32,7 +32,7 @@ test('mongodb unique identified is name id not _id', async (done) => {
     done();
 })
 
-test('blogs are added correctly', async (done) => {
+test('blogs are added correctly when authorized', async (done) => {
     const newBlog = {
         title: "Go To Statement Considered Harmful", 
         author: "Edsger W. Dijkstra", 
@@ -63,7 +63,7 @@ test('blogs are added correctly', async (done) => {
     done();
 })
 
-test('if likes missing, default to 0', async (done) => {
+test('if likes missing, default to 0 when creating new blog while being authorized', async (done) => {
     const newBlog = {
         title: "Go To Statement Considered Harmful", 
         author: "Edsger W. Dijkstra", 
@@ -81,7 +81,7 @@ test('if likes missing, default to 0', async (done) => {
     done();
 }, 10000)
 
-test('if title or url missing, api returns status code 400 BAD REQUEST', async (done) => {
+test('if title or url missing, api returns status code 400 BAD REQUEST if authorized', async (done) => {
     const blogWithNoURL = {
         title: "Go To Statement Considered Harmful", 
         author: "Edsger W. Dijkstra", 
@@ -107,7 +107,7 @@ test('if title or url missing, api returns status code 400 BAD REQUEST', async (
     done();
 }, 10000)
 
-test('can delete a blog by id if its valid', async (done) => {
+test('can delete a blog by id if its valid and user is authorized', async (done) => {
     await api
     .delete('/api/blogs/5a422a851b54a676234d17f7')
     .expect(204)
